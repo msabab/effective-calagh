@@ -4,6 +4,8 @@ export const initialState = {
 
 export const AppReducer = (state, action) => {
     switch (action.type) {
+        case "initial_from_localstorage":
+            return action.value;
         case "create_task": {
             return {
                 ...state,
