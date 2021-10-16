@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 export const initialState = {
     tasks: [],
 };
@@ -10,8 +11,10 @@ export const AppReducer = (state, action) => {
             return {
                 ...state,
                 tasks: [...state.tasks, {
-                    id: Math.floor(Math.random() * 100),
+                    id: uuidv4(),
                     title: action.value.title,
+                    description: action.value.description,
+                    project: action.value.project,
                     startedAt: new Date(),
                     isFinished: false,
                     finishedAt: null,
@@ -47,7 +50,7 @@ export const AppReducer = (state, action) => {
         case "delete_task": {
             return {
                 ...state,
-                tasks: state.tasks.filter((task, index) => index !== action.value),
+                tasks: state.tasks.filter((task, index) => task.id !== action.value),
             };
         }
         default:
