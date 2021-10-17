@@ -1,14 +1,10 @@
 
 const Layout = ({ children }) => {
     return (
-        <div className="layout">
-            {/* <Header /> */}
-            <div className="bg-gray-100 min-h-screen grid place-items-center">
-                <div className="max-w-full w-96 relative">
-                    {children}
-                </div>
+        <div className="bg-gray-200 min-h-screen grid place-items-center">
+            <div className="max-w-full w-96 relative bg-gray-100 p-4 rounded-lg">
+                {children}
             </div>
-            {/* <Footer /> */}
         </div>
     );
 }

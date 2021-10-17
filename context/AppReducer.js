@@ -7,6 +7,8 @@ export const AppReducer = (state, action) => {
     switch (action.type) {
         case "initial_from_localstorage":
             return action.value;
+
+
         case "create_task": {
             return {
                 ...state,
@@ -15,23 +17,29 @@ export const AppReducer = (state, action) => {
                     title: action.value.title,
                     description: action.value.description,
                     project: action.value.project,
-                    startedAt: new Date(),
-                    isFinished: false,
+                    createdAt: new Date(),
+                    startedAt: null,
                     finishedAt: null,
                 }]
-            }
+            };
         }
+
+
         case "start_task": {
             return {
                 ...state,
                 tasks: state.tasks.map(task => {
                     if (task.id === action.value) {
                         task.startedAt = new Date();
+
                     }
                     return task;
                 })
-            }
+            };
         }
+
+
+
         case "finish_task": {
             return {
                 ...state,
@@ -39,21 +47,43 @@ export const AppReducer = (state, action) => {
                     if (task.id === action.value) {
                         return {
                             ...task,
-                            isFinished: true,
                             finishedAt: new Date(),
                         };
                     }
                     return task;
                 })
-            }
+            };
         }
+
+
         case "delete_task": {
             return {
                 ...state,
                 tasks: state.tasks.filter((task, index) => task.id !== action.value),
+
             };
         }
+
+        case "edit_task": {
+            return {
+                ...state,
+                tasks: state.tasks.map(task => {
+                    if (task.id === action.value.id) {
+                        return {
+                            ...task,
+                            title: action.value.title,
+                            description: action.value.description,
+                            project: action.value.project,
+                        }
+                    }
+                    return task;
+                })
+            };
+        }
+
+
         default:
-            return state;
+            state;
+
     }
-};
+}
